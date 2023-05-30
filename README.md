@@ -236,12 +236,12 @@ Please see Appendix
 <p>
 
 We have created <a href="./BrainTumorDataset.py">BrainTumorDataset</a> class to create <b>train</b> and <b>test</b> dataset from the 
-the original downloaded file..<br>
+the original downloaded file.<br>
 <pre>
 >python TensorflowAttentionUNetBrainTumorTrainer.py
 </pre>
 
-In this case, the training process has just been stopped at epoch 64 by that callback.<br><br>
+In this case, the training process has just been stopped at epoch 39 by an earlystopping callback.<br><br>
 <img src="./asset/train_console_output_at_epoch_39_0530.png" width="720" height="auto"><br>
 <br>
 <b>Train accuracies line graph</b>:<br>

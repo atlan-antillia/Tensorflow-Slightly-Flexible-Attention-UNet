@@ -153,7 +153,7 @@ class TensorflowAttentionUNet(TensorflowUNet):
   def __init__(self, config_file):
     super().__init__(config_file)
 
-  # The following methods have been take from the following code.
+  # The following methods have been taken from the following code.
   # https://github.com/nikhilroxtomar/Semantic-Segmentation-Architecture/blob/main/TensorFlow/attention-unet.py
   def conv_block(self, x, num_filters):
     x = Conv2D(num_filters, 3, padding="same")(x)
@@ -187,7 +187,7 @@ class TensorflowAttentionUNet(TensorflowUNet):
     return x
 
   # Customizable by the parameters in a configuration file.
-  # This will override create method defined in TensorflowUNet class 
+  # This will override create method defined in TensorflowUNet class. 
   def create(self, num_classes, image_height, image_width, image_channels,
             base_filters = 16, num_layers = 5):
     print("=== TensorflowAttentionUNet.create ")

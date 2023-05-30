@@ -98,9 +98,7 @@ output_dir     = "./eval_output"
 images_dir    = "./mini_test" 
 output_dir    = "./mini_test_output"
 merged_dir    = "./mini_test_output_merged"
-
 </pre>
-
 <!--
 <table width="720" >
 

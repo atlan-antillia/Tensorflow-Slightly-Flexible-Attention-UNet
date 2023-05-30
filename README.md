@@ -268,7 +268,6 @@ in the following way.<br>
 
 <img src="./asset/evaluate_console_output_at_epoch_39_0530.png" width="720" height="auto"><br>
 <br>
-This prediction process will create the grayscale image files with white predicted nuclei regions.<br>
 
 <h2>
 5 Inference 

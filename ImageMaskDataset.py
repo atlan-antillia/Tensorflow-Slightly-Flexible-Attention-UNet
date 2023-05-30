@@ -98,10 +98,7 @@ class ImageMaskDataset:
 if __name__ == "__main__":
   try:
     resized_image = (256, 256, 3)
-    threshold = 128
-    binarize  = True
-    blur_mask = True
-    dataset = ImageMaskDataset(resized_image, threshold=threshold, binarize=binarize, blur_mask=blur_mask)
+    dataset = ImageMaskDataset(resized_image)
 
     # train dataset
     original_data_path  = "./BrainTumor/train/image/"

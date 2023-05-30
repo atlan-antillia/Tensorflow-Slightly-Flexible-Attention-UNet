@@ -1,1 +1,1 @@
-python ./TensorflowAttentionUNetBrainTumorEvaluator.py
+python ./TensorflowAttentionUNetEvaluator.py

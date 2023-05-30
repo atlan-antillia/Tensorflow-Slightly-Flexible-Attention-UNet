@@ -243,9 +243,9 @@ Please run the following bat file.
 >1.train.bat
 </pre>
 which runs the Python script 
-<a href="./TensorflowAttentionUNetBrainTumorTrainer.py">TensorflowAttentionUNetBrainTumorTrainer.py</a>
+<a href="./TensorflowAttentionUNetTrainer.py">TensorflowAttentionUNetTrainer.py</a>
 <pre>
-python TensorflowAttentionUNetBrainTumorTrainer.py
+python TensorflowAttentionUNetTrainer.py
 </pre>
 
 In this case, the training process has just been stopped at epoch 39 by an earlystopping callback.<br><br>
@@ -269,9 +269,9 @@ Please run the following bat file.
 >2.evaluate.bat
 </pre>
 , which runs the Python script 
-<a href="./TensorflowAttentionUNetBrainTumorEvaluator.py">TensorflowAttentionUNetBrainTumorEvaluator.py</a>
+<a href="./TensorflowAttentionUNetEvaluator.py">TensorflowAttentionUNetEvaluator.py</a>
 <pre>
-python TensorflowAttentionUNetBrainTumorEvaluator.py
+python TensorflowAttentionUNetEvaluator.py
 </pre>
 
 <img src="./asset/evaluate_console_output_at_epoch_39_0530.png" width="720" height="auto"><br>
@@ -287,9 +287,9 @@ Please run the following bat file.<br>
 3.infer.bat
 </pre>
 which runs the Python script 
-<a href="./TensorflowAttentionUNetBrainTumorInfer.py">TensorflowAttentionUNetBrainTumorInfer.py</a>
+<a href="./TensorflowAttentionUNetInfer.py">TensorflowAttentionUNetInfer.py</a>
 <pre>
-python TensorflowAttentionUNetBrainTumorInfer.py
+python TensorflowAttentionUNetInfer.py
 </pre>
 This inference process will create the grayscale image files with white predicted BrainTumor regions,
 and those images will have the same size of the original input images respectively. Therefore, you can easily compare 
@@ -319,9 +319,9 @@ Please run the following bat file.
 >4.train.bat
 </pre>
 which runs the Python script 
-<a href="./TensorflowAttentionUNetBrainTumorTrainer.py">TensorflowAttentionUNetBrainTumorTrainer.py</a>
+<a href="./TensorflowAttentionUNetTrainer.py">TensorflowAttentionUNetTrainer.py</a>
 <pre>
-python ./TensorflowAttentionUNetBrainTumorTrainer.py ./train_eval_infer_basnet_hybrid_loss.config
+python ./TensorflowAttentionUNetTrainer.py ./train_eval_infer_basnet_hybrid_loss.config
 </pre>
 <pre>
 ; train_eval_infer_basnet_hybrid_loss.config
@@ -381,9 +381,9 @@ Please run the following bat file.
 >5.evaluate.bat
 </pre>
 , which runs the Python script 
-<a href="./TensorflowAttentionUNetBrainTumorEvaluator.py">TensorflowAttentionUNetBrainTumorEvaluator.py</a>
+<a href="./TensorflowAttentionUNetEvaluator.py">TensorflowAttentionUNetEvaluator.py</a>
 <pre>
-python TensorflowAttentionUNetBrainTumorEvaluator.py ./train_eval_infer_basnet_hybrid_loss.config
+python TensorflowAttentionUNetEvaluator.py ./train_eval_infer_basnet_hybrid_loss.config
 </pre>
 
 <img src="./asset/evalute_basnet_console_output_at_epoch_37_0530.png" width="720" height="auto"><br>
@@ -399,9 +399,9 @@ Please run the following bat file.<br>
 6.infer.bat
 </pre>
 which runs the Python script 
-<a href="./TensorflowAttentionUNetBrainTumorInfer.py">TensorflowAttentionUNetBrainTumorInfer.py</a>
+<a href="./TensorflowAttentionUNetInfer.py">TensorflowAttentionUNetInfer.py</a>
 <pre>
-python TensorflowAttentionUNetBrainTumorInfer.py ./train_eval_infer_basnet_hybrid_loss.config
+python TensorflowAttentionUNetInfer.py ./train_eval_infer_basnet_hybrid_loss.config
 </pre>
 This inference process will create the grayscale image files with white predicted BrainTumor regions, 
 and those images will have the same size of the original input images respectively. Therefore, you can easily compare 

@@ -259,7 +259,7 @@ In this case, the training process has just been stopped at epoch 39 by an early
  We can evaluate the prediction accuracy in <b>test</b> dataset by using our Trained TensorflowAttentionUNet Model,
 and <b>train_eval_infer.config</b> file.<br>
 
-Please run the Python script <a href="./TensorflowAttentionUNetBrainTumoEvaluatorpy">TensorflowAttentionUNetBrainTumorEvaluator.py</a> 
+Please run the Python script <a href="./TensorflowAttentionUNetBrainTumorEvaluatorpy">TensorflowAttentionUNetBrainTumorEvaluator.py</a> 
 in the following way.<br>
 <pre>
 >python TensorflowAttentionUNetBrainTumorEvaluator.py

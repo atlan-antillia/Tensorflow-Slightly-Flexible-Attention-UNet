@@ -236,7 +236,7 @@ Please see Appendix
  You can create and train your TensorflowAttentionUNet model by BrainTumor dataset defined in the <b>train_eval_infer.config</b> file.<br>
 <p>
 
-We have created <a href="./BrainTumorDataset.py">BrainTumorDataset</a> class to create <b>train</b> and <b>test</b> dataset from the 
+We have created <a href="./ImageMaskDataset.py">ImageMaskDataset</a> class to create <b>train</b> and <b>test</b> dataset from the 
 the original downloaded file.<br>
 Please run the following bat file.
 <pre>

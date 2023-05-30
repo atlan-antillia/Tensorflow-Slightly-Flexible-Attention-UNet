@@ -243,7 +243,7 @@ Please run the following bat file.
 >1.train.bat
 </pre>
 which runs the Python script 
-<a href="./TensorflowAttentionUNetBrainTumorTrainer.py"TensorflowAttentionUNetBrainTumorTrainer.py</a>
+<a href="./TensorflowAttentionUNetBrainTumorTrainer.py">TensorflowAttentionUNetBrainTumorTrainer.py</a>
 <pre>
 python TensorflowAttentionUNetBrainTumorTrainer.py
 </pre>
@@ -269,7 +269,7 @@ Please run the following bat file.
 >2.evaluate.bat
 </pre>
 , which runs the Python script 
-<a href="./TensorflowAttentionUNetBrainTumorEvaluator.py"TensorflowAttentionUNetBrainTumorEvaluator.py</a>
+<a href="./TensorflowAttentionUNetBrainTumorEvaluator.py">TensorflowAttentionUNetBrainTumorEvaluator.py</a>
 <pre>
 python TensorflowAttentionUNetBrainTumorEvaluator.py
 </pre>
@@ -287,7 +287,7 @@ Please run the following bat file.<br>
 3.infer.bat
 </pre>
 which runs the Python script 
-<a href="./TensorflowAttentionUNetBrainTumorInfer.py"TensorflowAttentionUNetBrainTumorInfer.py</a>
+<a href="./TensorflowAttentionUNetBrainTumorInfer.py">TensorflowAttentionUNetBrainTumorInfer.py</a>
 <pre>
 python TensorflowAttentionUNetBrainTumorInfer.py
 </pre>

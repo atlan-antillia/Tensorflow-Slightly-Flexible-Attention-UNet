@@ -13,16 +13,11 @@
 # limitations under the License.
 #
 
-# TensorflowUNetNucleiInfer.py
-# 2023/05/05 to-arai
-
-# This is based on the code in the following web sites:
-
-# 1. Keras U-Net starter - LB 0.277
-# https://www.kaggle.com/code/keegil/keras-u-net-starter-lb-0-277/notebook
-
+# TensorflowAttentionUNetBrainTumorInfer.py
+# 2023/05/30 to-arai
 
 import os
+import sys
 import shutil
 import cv2
 import glob
@@ -33,8 +28,6 @@ os.environ["TF_ENABLE_GPU_GARBAGE_COLLECTION"]="false"
 import traceback
 
 from ConfigParser import ConfigParser
-from NucleiDataset import NucleiDataset
-from EpochChangeCallback import EpochChangeCallback
 
 from TensorflowAttentionUNet import TensorflowAttentionUNet
 
@@ -46,6 +39,8 @@ INFER  = "infer"
 if __name__ == "__main__":
   try:
     config_file    = "./train_eval_infer.config"
+    if len(sys.argv) == 2:
+      config_file = sys.argv[1]
     config     = ConfigParser(config_file)
 
     width      = config.get(MODEL, "image_width")

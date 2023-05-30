@@ -1,3 +1,3 @@
-python ./TensorflowUNetBrainTumorTrainer.py ./train_eval_infer_basnet_hybrid_loss.config
+python ./TensorflowAttentionUNetBrainTumorTrainer.py ./train_eval_infer_basnet_hybrid_loss.config
 
 

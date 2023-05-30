@@ -13,8 +13,8 @@
 # limitations under the License.
 #
 
-# TensorflowUNetNucleiTrainer.py
-# 2023/05/05 to-arai
+# TensorflowAttentionUNetBrainTumorTrainer.py
+# 2023/05/30 to-arai
 
 # This is based on the code in the following web sites:
 
@@ -31,9 +31,7 @@ import shutil
 import sys
 import traceback
 
-from ConfigParser import ConfigParser
-from BrainTumorDataset import BrainTumorDataset
-from EpochChangeCallback import EpochChangeCallback
+from ConfigParser import ConfigParsehChangeCallback
 
 from TensorflowAttentionUNet import TensorflowAttentionUNet
 
@@ -44,6 +42,9 @@ TRAIN  = "train"
 if __name__ == "__main__":
   try:
     config_file    = "./train_eval_infer.config"
+    if len(sys.argv) == 2:
+      config_file = sys.argv[1]
+
     config   = ConfigParser(config_file)
 
     width    = config.get(MODEL, "image_width")

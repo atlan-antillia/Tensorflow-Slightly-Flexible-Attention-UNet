@@ -291,9 +291,9 @@ which runs the Python script
 <pre>
 python TensorflowAttentionUNetBrainTumorInfer.py
 </pre>
-This inference process will create the grayscale image files with white predicted nuclei regions, 
+This inference process will create the grayscale image files with white predicted BrainTumor regions,
 and those images will have the same size of the original input images respectively. Therefore, you can easily compare 
-the input images and the infered output images.<br><br>
+the input images and the inferred output images.<br><br>
 
 <b>Input images (mini_test) </b><br>
 <img src="./asset/mini_test.png" width="1024" height="auto"><br>
@@ -307,6 +307,117 @@ the input images and the infered output images.<br><br>
 
 <img src="./asset/mini_test_inference_output_merged.png" width="1024" height="auto"><br><br>
 
+<!--
+
+  -->
+
+<h2>
+6 Train TensorflowAttentionUNet Model with basnet_hybrid_loss
+</h2>
+Please run the following bat file.
+<pre>
+>4.train.bat
+</pre>
+which runs the Python script 
+<a href="./TensorflowAttentionUNetBrainTumorTrainer.py">TensorflowAttentionUNetBrainTumorTrainer.py</a>
+<pre>
+python ./TensorflowAttentionUNetBrainTumorTrainer.py ./train_eval_infer_basnet_hybrid_loss.config
+</pre>
+<pre>
+; train_eval_infer_basnet_hybrid_loss.config
+; 2023/5/30 antillia.com
+
+[model]
+image_width    = 256
+image_height   = 256
+image_channels = 3
+num_classes    = 1
+base_filters   = 16
+num_layers     = 6
+dropout_rate   = 0.08
+learning_rate  = 0.001
+loss           = "basnet_hybrid_loss"
+metrics        = ["dice_coef", "sensitivity", "specificity"]
+show_summary   = False
+
+[train]
+epochs        = 100
+batch_size    = 4
+patience      = 10
+metrics       = ["dice_coef", "val_dice_coef"]
+model_dir     = "./basnet_models"
+eval_dir      = "./basnet_eval"
+image_datapath = "./BrainTumor/train/image/"
+mask_datapath  = "./BrainTumor/train/mask/"
+
+[eval]
+image_datapath = "./BrainTumor/test/image/"
+mask_datapath  = "./BrainTumor/test/mask/"
+
+[infer] 
+images_dir     = "./mini_test" 
+output_dir     = "./basnet_mini_test_output"
+merged_dir     = "./basnet_mini_test_output_merged"
+</pre>
+
+In this case, the training process has just been stopped at epoch 37 by an earlystopping callback.<br><br>
+<img src="./asset/train_basnet_console_output_at_epoch_37_0530.png" width="720" height="auto"><br>
+<br>
+<b>Train accuracies line graph</b>:<br>
+<img src="./asset/basnet_train_metrics_at_epoch_37.png" width="720" height="auto"><br>
+
+<br>
+<b>Train losses line graph</b>:<br>
+<img src="./asset/train_basnet_console_output_at_epoch_37_0530.png" width="720" height="auto"><br>
+
+
+<h2>
+7 Evaluation with basnet_hybrid_loss
+</h2>
+ We can evaluate the prediction accuracy in <b>test</b> dataset by using our Trained TensorflowAttentionUNet Model,
+and <b>train_eval_infer.config</b> file.<br>
+Please run the following bat file.
+<pre>
+>5.evaluate.bat
+</pre>
+, which runs the Python script 
+<a href="./TensorflowAttentionUNetBrainTumorEvaluator.py">TensorflowAttentionUNetBrainTumorEvaluator.py</a>
+<pre>
+python TensorflowAttentionUNetBrainTumorEvaluator.py ./train_eval_infer_basnet_hybrid_loss.config
+</pre>
+
+<img src="./asset/evalute_basnet_console_output_at_epoch_37_0530.png" width="720" height="auto"><br>
+<br>
+
+<h2>
+8 Inference with basnet_hybrid_loss
+</h2>
+ We can infer BrainTumor in <b>mini_test</b> dataset, which is a set of ten image files 
+extracted from the images in "test" folder.<br>
+Please run the following bat file.<br>
+<pre>
+6.infer.bat
+</pre>
+which runs the Python script 
+<a href="./TensorflowAttentionUNetBrainTumorInfer.py">TensorflowAttentionUNetBrainTumorInfer.py</a>
+<pre>
+python TensorflowAttentionUNetBrainTumorInfer.py ./train_eval_infer_basnet_hybrid_loss.config
+</pre>
+This inference process will create the grayscale image files with white predicted BrainTumor regions, 
+and those images will have the same size of the original input images respectively. Therefore, you can easily compare 
+the input images and the inferred output images.<br><br>
+
+<b>Input images (mini_test) </b><br>
+<img src="./asset/mini_test.png" width="1024" height="auto"><br>
+<br>
+<b>Infered images (basnet_mini_test_output)</b><br>
+
+<img src="./asset/basnet_mini_test_inference_output.png" width="1024" height="auto"><br><br>
+
+
+<b>Merged infered images (basnet_mini_test_output_merged)</b><br>
+
+<img src="./asset/basnet_mini_test_inference_output_merged.png" width="1024" height="auto"><br><br>
 
 <h3>
 References
@@ -321,7 +432,12 @@ Shokofeh Anari, Maryam Naseri & Malika Bendechache <br>
 <pre>
 https://www.nature.com/articles/s41598-021-90428-8
 </pre>
-<b>3. Deep learning based brain tumor segmentation: a survey</b><br>
+<pre>
+<b>3. Semantic-Segmentation-Architecture</b><br>
+<pre>
+ https://github.com/nikhilroxtomar/Semantic-Segmentation-Architecture/blob/main/TensorFlow/attention-unet.py
+</pre>
+<b>4. Deep learning based brain tumor segmentation: a survey</b><br>
 Zhihua Liu, Lei Tong, Long Chen, Zheheng Jiang, Feixiang Zhou,<br>
 Qianni Zhang, Xiangrong Zhang, Yaochu Jin & Huiyu Zhou
 <br>
@@ -329,18 +445,18 @@ Qianni Zhang, Xiangrong Zhang, Yaochu Jin & Huiyu Zhou
 https://link.springer.com/article/10.1007/s40747-022-00815-5
 </pre>
 
-<b>4. EfficientDet-MRI-Brain-Tumor</b><br>
+<b>5. EfficientDet-MRI-Brain-Tumor</b><br>
 Toshiyuki Arai @antillia.com<br>
 <pre>
 https://github.com/sarah-antillia/EfficientDet-MRI-Brain-Tumor
 </pre>
-<b>5. Image-Segmentation-Brain-Tumor</b><br>
+<b>6. Image-Segmentation-Brain-Tumor</b><br>
 Toshiyuki Arai @antillia.com<br>
 <pre>
 https://github.com/atlan-antillia/Image-Segmentation-Brain-Tumor
 </pre>
 
-<b>6. Semantic-Segmentation-Loss-Functions (SemSegLoss)</b><br>
+<b>7. Semantic-Segmentation-Loss-Functions (SemSegLoss)</b><br>
 <pre>
 https://github.com/shruti-jadon/Semantic-Segmentation-Loss-Functions
 </pre>

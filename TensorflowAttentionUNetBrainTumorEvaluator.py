@@ -14,10 +14,11 @@
 #
 
 # TensorflowAttentionUNetBrainTumorEvaluator.py
-# 2023/05/05 to-arai
-
+# 2023/05/30 to-arai
 
 import os
+import sys
+
 import shutil
 
 os.environ["TF_FORCE_GPU_ALLOW_GROWTH"] = "true"
@@ -26,11 +27,7 @@ os.environ["TF_ENABLE_GPU_GARBAGE_COLLECTION"]="false"
 import traceback
 
 from ConfigParser import ConfigParser
-from BrainTumorDataset import BrainTumorDataset
-from EpochChangeCallback import EpochChangeCallback
-
 from TensorflowAttentionUNet import TensorflowAttentionUNet
-from GrayScaleImageWriter import GrayScaleImageWriter
 
 MODEL  = "model"
 TRAIN  = "train"
@@ -40,6 +37,9 @@ EVAL   = "eval"
 if __name__ == "__main__":
   try:
     config_file    = "./train_eval_infer.config"
+    if len(sys.argv) == 2:
+      config_file = sys.argv[1]
+
     config     = ConfigParser(config_file)
 
     width      = config.get(MODEL, "image_width")

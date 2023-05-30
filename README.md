@@ -295,8 +295,74 @@ the input images and the infered output images.<br><br>
 <img src="./asset/mini_test_inference_output_merged.png" width="1024" height="auto"><br><br>
 
 
+<h3>
+References
+</h3>
+<b>1. Brain MRI segmentation</b><br>
+<pre>
+https://www.kaggle.com/datasets/mateuszbuda/lgg-mri-segmentation
+</pre>
+<b>2. Brain tumor segmentation based on deep learning and an attention mechanism using MRI multi-modalities brain images</b><br>
+Ramin Ranjbarzadeh, Abbas Bagherian Kasgari, Saeid Jafarzadeh Ghoushchi, <br>
+Shokofeh Anari, Maryam Naseri & Malika Bendechache <br>
+<pre>
+https://www.nature.com/articles/s41598-021-90428-8
+</pre>
+<b>3. Deep learning based brain tumor segmentation: a survey</b><br>
+Zhihua Liu, Lei Tong, Long Chen, Zheheng Jiang, Feixiang Zhou,<br>
+Qianni Zhang, Xiangrong Zhang, Yaochu Jin & Huiyu Zhou
+<br>
+<pre>
+https://link.springer.com/article/10.1007/s40747-022-00815-5
+</pre>
 
-<h2>
+<b>4. EfficientDet-MRI-Brain-Tumor</b><br>
+Toshiyuki Arai @antillia.com<br>
+<pre>
+https://github.com/sarah-antillia/EfficientDet-MRI-Brain-Tumor
+</pre>
+
+<b>5. Semantic-Segmentation-Loss-Functions (SemSegLoss)</b><br>
+<pre>
+https://github.com/shruti-jadon/Semantic-Segmentation-Loss-Functions
+</pre>
+<pre>
+Citation
+@inproceedings{jadon2020survey,
+  title={A survey of loss functions for semantic segmentation},
+  author={Jadon, Shruti},
+  booktitle={2020 IEEE Conference on Computational Intelligence in Bioinformatics and Computational Biology (CIBCB)},
+  pages={1--7},
+  year={2020},
+  organization={IEEE}
+}
+@article{JADON2021100078,
+title = {SemSegLoss: A python package of loss functions for semantic segmentation},
+journal = {Software Impacts},
+volume = {9},
+pages = {100078},
+year = {2021},
+issn = {2665-9638},
+doi = {https://doi.org/10.1016/j.simpa.2021.100078},
+url = {https://www.sciencedirect.com/science/article/pii/S2665963821000269},
+author = {Shruti Jadon},
+keywords = {Deep Learning, Image segmentation, Medical imaging, Loss functions},
+abstract = {Image Segmentation has been an active field of research as it has a wide range of applications, 
+ranging from automated disease detection to self-driving cars. In recent years, various research papers 
+proposed different loss functions used in case of biased data, sparse segmentation, and unbalanced dataset. 
+In this paper, we introduce SemSegLoss, a python package consisting of some of the well-known loss functions 
+widely used for image segmentation. It is developed with the intent to help researchers in the development 
+of novel loss functions and perform an extensive set of experiments on model architectures for various 
+applications. The ease-of-use and flexibility of the presented package have allowed reducing the development 
+time and increased evaluation strategies of machine learning models for semantic segmentation. Furthermore, 
+different applications that use image segmentation can use SemSegLoss because of the generality of its 
+functions. This wide range of applications will lead to the development and growth of AI across all industries.
+}
+}
+</pre>
+<br>
+
+<h3>
 Appendix:
 </h3>
 <pre>

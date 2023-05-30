@@ -31,8 +31,8 @@ import shutil
 import sys
 import traceback
 
-from ConfigParser import ConfigParsehChangeCallback
-
+from ConfigParser import ConfigParser
+from ImageMaskDataset import ImageMaskDataset
 from TensorflowAttentionUNet import TensorflowAttentionUNet
 
 MODEL  = "model"
@@ -60,7 +60,7 @@ if __name__ == "__main__":
     model          = TensorflowAttentionUNet(config_file)
     
     resized_image    = (height, width, channels)
-    dataset          = BrainTumorDataset(resized_image)
+    dataset          = ImageMaskDataset(resized_image)
     x_train, y_train = dataset.create(image_datapath, mask_datapath)
 
     model.train(x_train, y_train)

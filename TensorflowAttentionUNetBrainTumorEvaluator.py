@@ -27,6 +27,7 @@ os.environ["TF_ENABLE_GPU_GARBAGE_COLLECTION"]="false"
 import traceback
 
 from ConfigParser import ConfigParser
+from ImageMaskDataset import ImageMaskDataset
 from TensorflowAttentionUNet import TensorflowAttentionUNet
 
 MODEL  = "model"
@@ -55,7 +56,7 @@ if __name__ == "__main__":
     model          = TensorflowAttentionUNet(config_file)
 
     resized_image  = (height, width, channels)
-    dataset        = BrainTumorDataset(resized_image)
+    dataset        = ImageMaskDataset(resized_image)
     x_test, y_test = dataset.create(image_datapath, mask_datapath)
   
     model.evaluate(x_test, y_test)

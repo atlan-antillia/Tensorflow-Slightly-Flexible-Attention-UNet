@@ -187,6 +187,7 @@ class TensorflowAttentionUNet(TensorflowUNet):
     return x
 
   # Customizable by the parameters in a configuration file.
+  # This will override create method defined in TensorflowUNet class 
   def create(self, num_classes, image_height, image_width, image_channels,
             base_filters = 16, num_layers = 5):
     print("=== TensorflowAttentionUNet.create ")

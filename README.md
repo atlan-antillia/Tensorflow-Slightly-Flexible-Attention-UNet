@@ -186,7 +186,7 @@ class TensorflowAttentionUNet(TensorflowUNet):
     x = self.conv_block(x, num_filters)
     return x
 
-  # Customizable by the parameters in a configuration file.
+  # Customizable by the parameters base_filters and num_layers in a configuration file.
   # This will override create method defined in TensorflowUNet class. 
   def create(self, num_classes, image_height, image_width, image_channels,
             base_filters = 16, num_layers = 5):
@@ -238,8 +238,14 @@ Please see Appendix
 
 We have created <a href="./BrainTumorDataset.py">BrainTumorDataset</a> class to create <b>train</b> and <b>test</b> dataset from the 
 the original downloaded file.<br>
+Please run the following bat file.
 <pre>
->python TensorflowAttentionUNetBrainTumorTrainer.py
+>1.train.bat
+</pre>
+which runs the Python script 
+<a href="./TensorflowAttentionUNetBrainTumorTrainer.py"TensorflowAttentionUNetBrainTumorTrainer.py</a>
+<pre>
+python TensorflowAttentionUNetBrainTumorTrainer.py
 </pre>
 
 In this case, the training process has just been stopped at epoch 39 by an earlystopping callback.<br><br>
@@ -258,11 +264,14 @@ In this case, the training process has just been stopped at epoch 39 by an early
 </h2>
  We can evaluate the prediction accuracy in <b>test</b> dataset by using our Trained TensorflowAttentionUNet Model,
 and <b>train_eval_infer.config</b> file.<br>
-
-Please run the Python script <a href="./TensorflowAttentionUNetBrainTumorEvaluatorpy">TensorflowAttentionUNetBrainTumorEvaluator.py</a> 
-in the following way.<br>
+Please run the following bat file.
 <pre>
->python TensorflowAttentionUNetBrainTumorEvaluator.py
+>2.evaluate.bat
+</pre>
+, which runs the Python script 
+<a href="./TensorflowAttentionUNetBrainTumorEvaluator.py"TensorflowAttentionUNetBrainTumorEvaluator.py</a>
+<pre>
+python TensorflowAttentionUNetBrainTumorEvaluator.py
 </pre>
 
 <img src="./asset/evaluate_console_output_at_epoch_39_0530.png" width="720" height="auto"><br>
@@ -271,13 +280,16 @@ in the following way.<br>
 <h2>
 5 Inference 
 </h2>
- We can infer nuclei in <b>mini_test</b> dataset, which is a set of ten image files 
-extracted from the images in "stage1_test" folder, by using our Trained TensorflowUNet Model,
-
-Please run the Python script <a href="./TensorflowAttentionUNetBrainTumorInfer.py">TensorflowAttentionUNetBrainTumorInfer.py</a> 
-in the following way.<br>
+ We can infer BrainTumor in <b>mini_test</b> dataset, which is a set of ten image files 
+extracted from the images in "test" folder.<br>
+Please run the following bat file.<br>
 <pre>
->python TensorflowAttentionUNetBrainTumorInfer.py
+3.infer.bat
+</pre>
+which runs the Python script 
+<a href="./TensorflowAttentionUNetBrainTumorInfer.py"TensorflowAttentionUNetBrainTumorInfer.py</a>
+<pre>
+python TensorflowAttentionUNetBrainTumorInfer.py
 </pre>
 This inference process will create the grayscale image files with white predicted nuclei regions, 
 and those images will have the same size of the original input images respectively. Therefore, you can easily compare 

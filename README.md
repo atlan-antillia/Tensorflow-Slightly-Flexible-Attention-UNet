@@ -432,7 +432,7 @@ Shokofeh Anari, Maryam Naseri & Malika Bendechache <br>
 <pre>
 https://www.nature.com/articles/s41598-021-90428-8
 </pre>
-<pre>
+
 <b>3. Semantic-Segmentation-Architecture</b><br>
 <pre>
  https://github.com/nikhilroxtomar/Semantic-Segmentation-Architecture/blob/main/TensorFlow/attention-unet.py

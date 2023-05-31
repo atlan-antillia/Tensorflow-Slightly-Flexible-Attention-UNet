@@ -14,13 +14,12 @@
 #
 
 # TensorflowAttentionUNetBrainTumorInfer.py
-# 2023/05/30 to-arai
+# 2023/05/31 to-arai
 
 import os
 import sys
 import shutil
-import cv2
-import glob
+
 
 os.environ["TF_FORCE_GPU_ALLOW_GROWTH"] = "true"
 os.environ["TF_ENABLE_GPU_GARBAGE_COLLECTION"]="false"
@@ -42,24 +41,17 @@ if __name__ == "__main__":
     if len(sys.argv) == 2:
       config_file = sys.argv[1]
     config     = ConfigParser(config_file)
-
-    width      = config.get(MODEL, "image_width")
-    height     = config.get(MODEL, "image_height")
-    channels   = config.get(MODEL, "image_channels")
     images_dir = config.get(INFER, "images_dir")
     output_dir = config.get(INFER, "output_dir")
-    if not (width == height and  height % 128 == 0 and width % 128 == 0):
-      raise Exception("Image width should be a multiple of 128. For example 128, 256, 512")
-    
+ 
     # Create a UNetMolde and compile
     model          = TensorflowAttentionUNet(config_file)
     
     if not os.path.exists(images_dir):
       raise Exception("Not found " + images_dir)
-
+    
     if os.path.exists(output_dir):
       shutil.rmtree(output_dir)
-
     if not os.path.exists(output_dir):
       os.makedirs(output_dir)
 

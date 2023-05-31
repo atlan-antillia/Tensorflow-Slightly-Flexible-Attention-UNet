@@ -47,21 +47,11 @@ if __name__ == "__main__":
 
     config   = ConfigParser(config_file)
 
-    width    = config.get(MODEL, "image_width")
-    height   = config.get(MODEL, "image_height")
-    channels = config.get(MODEL, "image_channels")
-    image_datapath = config.get(TRAIN, "image_datapath")
-    mask_datapath = config.get(TRAIN, "mask_datapath")
-
-    if not (width == height and  height % 128 == 0 and width % 128 == 0):
-      raise Exception("Image width should be a multiple of 128. For example 128, 256, 512")
-    
     # Create a UNetMolde and compile
-    model          = TensorflowAttentionUNet(config_file)
+    model   = TensorflowAttentionUNet(config_file)
     
-    resized_image    = (height, width, channels)
-    dataset          = ImageMaskDataset(resized_image)
-    x_train, y_train = dataset.create(image_datapath, mask_datapath)
+    dataset = ImageMaskDataset(config_file)
+    x_train, y_train = dataset.create(dataset=TRAIN)
 
     model.train(x_train, y_train)
 

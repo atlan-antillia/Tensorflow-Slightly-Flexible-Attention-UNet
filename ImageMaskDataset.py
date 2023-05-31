@@ -14,7 +14,7 @@
 #
 
 # ImageMaskDataset.py
-# 2023/05/31 to-arai
+# 2023/05/31 to-arai Modified to use config_file
 
 import os
 import numpy as np
@@ -24,18 +24,45 @@ import glob
 from matplotlib import pyplot as plt
 from skimage.io import imread, imshow
 import traceback
+from ConfigParser import ConfigParser
+
+MODEL  = "model"
+TRAIN  = "train"
+EVAL   = "eval"
+MASK   = "mask"
 
 class ImageMaskDataset:
 
-  def __init__(self, resized_image, threshold=160, binarize=True, blur_mask=True):
-    self.img_width, self.img_height, self.img_channels = resized_image
-    self.binarize  = binarize
-    self.threshold = threshold
+  def __init__(self, config_file):
+    config = ConfigParser(config_file)
+    self.image_width    = config.get(MODEL, "image_width")
+    self.image_height   = config.get(MODEL, "image_height")
+    self.image_channels = config.get(MODEL, "image_channels")
+    self.train_dataset  = [ config.get(TRAIN, "image_datapath"),
+                            config.get(TRAIN, "mask_datapath")]
+    
+    self.eval_dataset   = [ config.get(EVAL, "image_datapath"),
+                            config.get(EVAL, "mask_datapath")]
+
+    self.binarize  = config.get(MASK, "binarize")
+    self.threshold = config.get(MASK, "threshold")
+    self.blur_mask = config.get(MASK, "blur")
+
+    #Fixed blur_size
     self.blur_size = (3, 3)
-    self.blur_mask = blur_mask
+
 
   # If needed, please override this method in a subclass derived from this class.
-  def create(self, image_datapath, mask_datapath,  debug=False):
+  def create(self, dataset = TRAIN,  debug=False):
+    if not dataset in [TRAIN, EVAL]:
+      raise Exception("Invalid dataset")
+    image_datapath = None
+    mask_datapath  = None
+  
+    [image_datapath, mask_datapath] = self.train_dataset
+    if dataset == EVAL:
+      [image_datapath, mask_datapath] = self.eval_dataset
+
     image_files  = glob.glob(image_datapath + "/*.jpg")
     image_files += glob.glob(image_datapath + "/*.png")
     image_files += glob.glob(image_datapath + "/*.bmp")
@@ -57,22 +84,22 @@ class ImageMaskDataset:
     if num_images == 0:
       raise Exception("FATAL: Not found image files")
     
-    X = np.zeros((num_images, self.img_height, self.img_width, self.img_channels), dtype=np.uint8)
+    X = np.zeros((num_images, self.image_height, self.image_width, self.image_channels), dtype=np.uint8)
 
-    Y = np.zeros((num_images, self.img_height, self.img_width, 1                ), dtype=np.bool)
+    Y = np.zeros((num_images, self.image_height, self.image_width, 1                ), dtype=np.bool)
 
     for n, image_file in tqdm(enumerate(image_files), total=len(image_files)):
   
       image = cv2.imread(image_file)
       
-      image = cv2.resize(image, dsize= (self.img_height, self.img_width), interpolation=cv2.INTER_NEAREST)
+      image = cv2.resize(image, dsize= (self.image_height, self.image_width), interpolation=cv2.INTER_NEAREST)
       X[n]  = image
 
       if mask_files != None:
 
         mask  = cv2.imread(mask_files[n])
         mask  = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)
-        mask  = cv2.resize(mask, dsize= (self.img_height, self.img_width),   interpolation=cv2.INTER_NEAREST)
+        mask  = cv2.resize(mask, dsize= (self.image_height, self.image_width),   interpolation=cv2.INTER_NEAREST)
 
         # Binarize mask
         if self.binarize:
@@ -97,21 +124,16 @@ class ImageMaskDataset:
     
 if __name__ == "__main__":
   try:
-    resized_image = (256, 256, 3)
-    dataset = ImageMaskDataset(resized_image)
+    config_file = "./train_eval_infer.config"
 
-    # train dataset
-    original_data_path  = "./BrainTumor/train/image/"
-    segmented_data_path = "./BrainTumor/train/mask/"
-    x_train, y_train = dataset.create(original_data_path, segmented_data_path)
+    dataset = ImageMaskDataset(config_file)
+
+    x_train, y_train = dataset.create(dataset=TRAIN)
     print(" len x_train {}".format(len(x_train)))
     print(" len y_train {}".format(len(y_train)))
 
     # test dataset
-    original_data_path  = "./BrainTumor/test/image/"
-    segmented_data_path = "./BrainTumor/test/mask/"
-
-    x_test, y_test = dataset.create(original_data_path, segmented_data_path)
+    x_test, y_test = dataset.create(dataset=EVAL)
     print(" len x_test {}".format(len(x_test)))
     print(" len y_test {}".format(len(y_test)))
 

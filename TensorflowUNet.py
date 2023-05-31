@@ -89,6 +89,10 @@ class TensorflowUNet:
     num_classes    = self.config.get(MODEL, "num_classes")
     base_filters   = self.config.get(MODEL, "base_filters")
     num_layers     = self.config.get(MODEL, "num_layers")
+ 
+
+    if not (image_width == image_height and  image_width % 128 == 0 and image_height % 128 == 0):
+      raise Exception("Image width should be a multiple of 128. For example 128, 256, 512")
     
     self.model     = self.create(num_classes, image_height, image_width, image_channels, 
                             base_filters = base_filters, num_layers = num_layers)
@@ -311,25 +315,14 @@ class TensorflowUNet:
     
 if __name__ == "__main__":
   try:
-    config_file    = "./model.config"
-    config   = ConfigParser(config_file)
-
-    width    = config.get(MODEL, "image_width")
-    height   = config.get(MODEL, "image_height")
-    channels = config.get(MODEL, "image_channels")
-
-    if not (width == height and  height % 128 == 0 and width % 128 == 0):
-      raise Exception("Image width should be a multiple of 128. For example 128, 256, 512")
+    config_file    = "./train_eval_infer.config"
     
     # Create a UNetMolde and compile
     model    = TensorflowUNet(config_file)
     
     """
-    resized_image     = (height, width, channels)
-    train_datapath    = "./stage1_train/"
-    dataset           = NucleiDataset(resized_image)
-
-    x_train, y_train  = dataset.create(train_datapath, has_mask=True)
+    datatset = ImageMaskDataset(config_file)
+    x_train, y_train  = dataset.create(dataset=TRAIN)
 
     model.train(x_train, y_train)
     """

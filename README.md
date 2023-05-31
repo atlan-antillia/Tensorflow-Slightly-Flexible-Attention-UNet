@@ -1,4 +1,4 @@
-# Tensorflow-Slightly-Flexible-Attention-UNet (Updated: 2023/05/30)
+# Tensorflow-Slightly-Flexible-Attention-UNet (Updated: 2023/05/31)
 
 <h2>
 1 Tensorflow Attention UNet Model
@@ -98,6 +98,11 @@ output_dir     = "./eval_output"
 images_dir    = "./mini_test" 
 output_dir    = "./mini_test_output"
 merged_dir    = "./mini_test_output_merged"
+
+[mask]
+blur      = True
+binarize  = True
+threshold = 128
 </pre>
 <!--
 <table width="720" >
@@ -358,6 +363,11 @@ mask_datapath  = "./BrainTumor/test/mask/"
 images_dir     = "./mini_test" 
 output_dir     = "./basnet_mini_test_output"
 merged_dir     = "./basnet_mini_test_output_merged"
+
+[mask]
+blur      = True
+binarize  = True
+threshold = 128
 </pre>
 
 In this case, the training process has just been stopped at epoch 37 by an earlystopping callback.<br><br>
